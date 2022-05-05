@@ -1,35 +1,44 @@
 package uz.epam.first.task.service.impl;
 
+import uz.epam.first.task.entity.CustomArray;
 import uz.epam.first.task.service.SearchService;
 import uz.epam.first.task.service.SortService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SearchServiceImpl implements SearchService {
+
     @Override
-    public int binarySearch(int[] array, int number) {
+    public int binarySearch(CustomArray customArray, int number) {
         SortService sortService = new SortServiceImpl();
-        sortService.bubbleSort(array);
-        int loop = 0;
-        int arrayLength = array.length;
-        while (loop < arrayLength) {
-        int middle = arrayLength/2;
-            if (array[middle] == number) {
-                return middle;
+        int[] array = customArray.getArray();
+        sortService.bubbleSort(customArray);
+        int firstIndex = 0;
+        int lastIndex = array.length - 1;
+        int middleIndex = (firstIndex + lastIndex) / 2;
+        while(firstIndex <= lastIndex){
+            if (array[middleIndex] == number){
+                return middleIndex;
             }
-            if (array[middle] < number){
-                arrayLength = middle - 1;
+            if (array[middleIndex] < number){
+                firstIndex = middleIndex + 1;
+            }else {
+                lastIndex = middleIndex - 1;
             }
-            if (array[middle] > number){
-                loop = middle + 1;
-            }
+            middleIndex = (firstIndex + lastIndex)/2;
         }
         return -1;
     }
 
+
     @Override
-    public int linearSearch(int[] array, int number) {
-        return 0;
+    public int linearSearch(CustomArray customArray, int number) {
+        int[] array = customArray.getArray();
+        int toReturn = -1;
+        for (int i = 0; i < array.length; i++){
+            if (array[i] == number){
+                toReturn = i;
+                break;
+            }
+        }
+        return toReturn;
     }
 }

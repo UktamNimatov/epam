@@ -1,24 +1,28 @@
 package uz.epam.first.task.service.impl;
 
-import uz.epam.first.task.service.ArrayService;
+import uz.epam.first.task.entity.CustomArray;
+import uz.epam.first.task.entity.CustomArrayValues;
+import uz.epam.first.task.service.CustomArrayService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayServiceImpl implements ArrayService {
+public class CustomArrayServiceImpl implements CustomArrayService {
 
     @Override
-    public int findMinNumberFromArray(int[] array) {
-        int toReturn = array[0];
-        for (int value : array)
-            if (toReturn < value) {
-                toReturn = value;
-            }
-        return toReturn;
+    public CustomArrayValues getCustomArrayValues(CustomArray customArray) {
+        CustomArrayValues values = new CustomArrayValues();
+         values.setCustomArrayId(customArray.getId());
+         values.setMax(findMaxNumberFromArray(customArray));
+         values.setMin(findMinNumberFromArray(customArray));
+         values.setSum(findSumOfElements(customArray));
+         values.setAverage(findAverage(customArray));
+         return values;
     }
 
     @Override
-    public int findMaxNumberFromArray(int[] array) {
+    public int findMinNumberFromArray(CustomArray customArray) {
+        int[] array = customArray.getArray();
         int toReturn = array[0];
         for (int value : array)
             if (toReturn > value) {
@@ -28,7 +32,19 @@ public class ArrayServiceImpl implements ArrayService {
     }
 
     @Override
-    public int[] findAllPrimeNumbers(int[] array) {
+    public int findMaxNumberFromArray(CustomArray customArray) {
+        int[] array = customArray.getArray();
+        int toReturn = array[0];
+        for (int value : array)
+            if (toReturn < value) {
+                toReturn = value;
+            }
+        return toReturn;
+    }
+
+    @Override
+    public int[] findAllPrimeNumbers(CustomArray customArray) {
+        int[] array = customArray.getArray();
         List<Integer> toReturn = new ArrayList<>();
         for (int element : array) {
             if (element <= 0) continue;
@@ -48,12 +64,13 @@ public class ArrayServiceImpl implements ArrayService {
     }
 
     @Override
-    public int[] findAllFibonacciNumbers(int[] array) {
+    public int[] findAllFibonacciNumbers(CustomArray customArray) {
         return new int[0];
     }
 
     @Override
-    public double findAverage(int[] array) {
+    public double findAverage(CustomArray customArray) {
+        int[] array = customArray.getArray();
         if (array.length == 0) return 0;
         double sum = 0;
         for (int element : array){
@@ -63,7 +80,8 @@ public class ArrayServiceImpl implements ArrayService {
     }
 
     @Override
-    public int findSumOfElements(int[] array) {
+    public int findSumOfElements(CustomArray customArray) {
+        int[] array = customArray.getArray();
         if (array.length == 0) return 0;
         int sum = 0;
         for (int element : array){

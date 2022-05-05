@@ -1,11 +1,13 @@
 package uz.epam.first.task.service;
 
+import uz.epam.first.task.entity.CustomArray;
+
 public interface SortService {
 
-    void bubbleSort(int[] array);
+    void bubbleSort(CustomArray customArray);
 
-    void selectionSort(int[] array);
+    void selectionSort(CustomArray customArray);
 
-    void insertionSort(int[] array);
+    void insertionSort(CustomArray customArray);
 
 }

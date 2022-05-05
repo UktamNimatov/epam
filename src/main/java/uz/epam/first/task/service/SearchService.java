@@ -1,8 +1,10 @@
 package uz.epam.first.task.service;
 
+import uz.epam.first.task.entity.CustomArray;
+
 public interface SearchService {
 
-    int binarySearch(int[] array, int number);
+    int binarySearch(CustomArray customArray, int number);
 
-    int linearSearch(int[] array, int number);
+    int linearSearch(CustomArray customArray, int number);
 }

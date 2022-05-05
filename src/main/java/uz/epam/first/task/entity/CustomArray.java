@@ -1,13 +1,33 @@
 package uz.epam.first.task.entity;
 
+import uz.epam.first.task.exception.IllegalIdException;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class CustomArray {
+
+    private int id;
+
     private int[] array;
 
-    public CustomArray(int[] array) {
+    public CustomArray(int id, int[] array) throws IllegalIdException{
+        if (id <= 0){
+            throw new IllegalIdException("Id must be a positive integer");
+        }
+        this.id = id;
         this.array = array;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) throws IllegalIdException{
+        if (id <= 0){
+            throw new IllegalIdException("Id must be a positive integer");
+        }
+        this.id = id;
     }
 
     public int[] getArray() {
@@ -28,7 +48,7 @@ public class CustomArray {
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(array);
+        return this.id * 31 + Arrays.hashCode(array);
     }
 
     @Override
